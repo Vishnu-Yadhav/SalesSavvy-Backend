@@ -46,6 +46,11 @@ public class AuthService {
     }
 
     public User authenticate(String username, String password) {
+//    	Optional<User> user = userRepository.findByUsername(username);
+//    	User euser = user.get();
+//    	if(euser==null) {
+//    		throw new RuntimeException("Invalid UserName");
+//    	}
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Invalid username or password"));
 
@@ -100,7 +105,6 @@ public class AuthService {
                 .setSigningKey(SIGNING_KEY)
                 .build()
                 .parseClaimsJws(token);
-
             // Check if the token exists in the database and is not expired
             Optional<JWTToken> jwtToken = jwtTokenRepository.findByToken(token);
             if (jwtToken.isPresent()) {

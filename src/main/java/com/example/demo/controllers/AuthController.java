@@ -29,7 +29,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         try {
