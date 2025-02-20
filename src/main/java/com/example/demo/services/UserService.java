@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
-    public User userRegister(User user) {
+    public User registerUser(User user) {
         // Check if username or email already exists
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already taken");
@@ -28,5 +28,4 @@ public class UserService {
         // Save the user
         return userRepository.save(user);
     }
-	
 }

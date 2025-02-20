@@ -14,7 +14,7 @@ import com.example.demo.entities.User;
 import com.example.demo.services.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}, allowCredentials = "true")
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -28,7 +28,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
-            User registeredUser = userService.userRegister(user);
+            User registeredUser = userService.registerUser(user);
             return ResponseEntity.ok(Map.of("message", "User registered successfully", "user", registeredUser));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
